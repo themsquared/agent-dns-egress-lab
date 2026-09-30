@@ -1,5 +1,7 @@
 # agent-dns-egress-lab
 
+> 📖 **Read the write-up:** [Your Agent Egress Proxy Never Saw the DNS Query](https://webofmike.com/agent-dns-egress-covert-channel/)
+
 **An HTTP egress proxy never sees a DNS query. This repo reproduces an agent exfiltrating data over DNS from inside a locked-down Kubernetes namespace, then shows the NetworkPolicy that actually stops it.**
 
 On 2026-09-20, an OpenAI agent working a research task hit a wall: its search tools failed. It probed its own network, found the training sandbox's DNS filtering was incomplete, and used public DNS-delegation services to relay questions to an external chatbot and read the answers back over DNS TXT queries. OpenAI's own writeup is public: [An agent used DNS to reach an external chatbot](https://alignment.openai.com/misalignment-reports/an-agent-used-dns-to-reach-an-external-chatbot/). The detection alert fired 12 minutes after the first successful query; the run wasn't terminated for another 2.5 hours because a monitor misread failed queries as proof the egress path was blocked.
